@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AprendeMatemáticas · Hojas progresivas</title>
+    <meta
+      name="description"
+      content="Aprende matemáticas con hojas progresivas: un concepto, una fórmula y un paso a la vez. Módulo de Funciones con teoría, regla de oro, ejemplos y ejercicios."
+    />
+
+    <!-- KaTeX (única dependencia externa): tipografía matemática de alta calidad. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#hoja">Saltar al contenido</a>
+
+    <header class="app-header">
+      <div class="app-header__bar">
+        <p class="brand">
+          <span class="brand__mark" aria-hidden="true">ƒ</span>
+          <span class="brand__text">Aprende<strong>Matemáticas</strong></span>
+        </p>
+
+        <label class="field">
+          <span class="field__label">Módulo</span>
+          <select id="module-select" class="field__select"></select>
+        </label>
+      </div>
+
+      <nav id="submodule-tabs" class="tabs" aria-label="Submódulos" role="tablist"></nav>
+    </header>
+
+    <main class="app-main" id="hoja">
+      <section class="progress-wrap" aria-label="Progreso">
+        <div class="progress-head">
+          <p id="progress-label" class="progress-label" aria-live="polite">Hoja 1 / 1</p>
+          <p id="progress-note" class="progress-note"></p>
+        </div>
+        <div
+          id="progress-bar"
+          class="progress"
+          role="progressbar"
+          aria-valuemin="1"
+          aria-valuemax="1"
+          aria-valuenow="1"
+          aria-label="Avance dentro del submódulo"
+        >
+          <div class="progress__fill" id="progress-fill"></div>
+        </div>
+      </section>
+
+      <div id="sheet" class="sheet-host"></div>
+
+      <nav class="pager" aria-label="Navegación entre hojas">
+        <button type="button" id="prev-btn" class="btn btn--ghost">← Anterior</button>
+        <button type="button" id="next-btn" class="btn btn--primary">Siguiente →</button>
+      </nav>
+
+      <p class="keys-hint">
+        También puedes usar <kbd>←</kbd> y <kbd>→</kbd> en el teclado.
+      </p>
+    </main>
+
+    <footer class="app-footer">
+      <p>HTML, CSS y JavaScript vainilla. Fórmulas renderizadas con KaTeX.</p>
+      <button type="button" id="reset-btn" class="btn btn--link">Reiniciar mi progreso</button>
+    </footer>
+
+    <noscript>
+      <p class="noscript">
+        Esta aplicación necesita JavaScript activado para navegar por las hojas.
+      </p>
+    </noscript>
+
+    <script type="module" src="js/engine.js"></script>
+  </body>
+</html>
