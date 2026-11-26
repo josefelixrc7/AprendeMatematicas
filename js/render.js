@@ -141,6 +141,11 @@ export function renderSheet(view, onGraded) {
     article.append(el('p', { className: 'sheet__text' }, richText(sheet.text)));
   }
 
+  // Teoría: versión rigurosa plegada en el acordeón «La versión formal».
+  if (sheet.formal) {
+    article.append(disclosure('La versión formal', [el('p', {}, richText(sheet.formal))]));
+  }
+
   if (sheet.kind === 'exercise' && sheet.question) {
     article.append(buildExercise(view, onGraded));
   }

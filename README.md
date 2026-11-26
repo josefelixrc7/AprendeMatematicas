@@ -47,6 +47,9 @@ se generan solos. Un submódulo puede usar `sheets` (hojas planas) o `groups`
 - Las fórmulas se escriben con `String.raw`, para no escapar las barras invertidas
   de LaTeX: ``formula: String.raw`\frac{1}{x}` ``.
 - En el texto, `$...$` en línea se tipografía con KaTeX.
+- Las hojas de teoría usan la técnica Feynman: `text` lleva la idea con una
+  analogía cotidiana en lenguaje claro, y `formal` guarda la versión rigurosa
+  que se muestra plegada en el acordeón «La versión formal».
 - En los ejemplos, el fragmento que cambia dentro de la fórmula se marca con
   `\boxed` o `\textcolor` (comandos nativos de KaTeX).
 - Los ejercicios admiten `type: 'choice'` (con `feedback` por opción) o

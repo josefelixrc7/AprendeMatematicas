@@ -13,6 +13,7 @@
  * @property {string} title Título corto de la hoja.
  * @property {string} [formula] LaTeX principal (se renderiza con KaTeX en modo display).
  * @property {string} [text] Explicación breve; admite HTML mínimo y `$...$` en línea.
+ * @property {string} [formal] Sólo teoría: versión rigurosa, dentro del acordeón «La versión formal».
  * @property {string} [change] Sólo ejemplos: qué cambió en este paso.
  * @property {string} [why] Texto del desplegable «¿Por qué?».
  * @property {string} [note] Nota al pie de la hoja.

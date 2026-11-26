@@ -1,9 +1,10 @@
 /**
  * Módulo Funciones · Submódulo «Teoría».
  *
- * Hojas planas: cada una presenta UNA idea, su fórmula (si aplica) y una
- * explicación breve. El detalle largo vive en `why` (desplegable «¿Por qué?»)
- * para que la vista principal nunca sature.
+ * Hojas planas escritas con la técnica Feynman: el texto principal (`text`)
+ * abre con la idea en lenguaje claro y una analogía de la vida real; la
+ * versión rigurosa vive en `formal` (desplegable «La versión formal») y
+ * `note` cierra cada hoja con una regla fácil de recordar.
  *
  * Todas las fórmulas usan `String.raw` para no pelear con las barras invertidas
  * de LaTeX.
@@ -16,17 +17,17 @@ export const teoriaSheets = [
     kind: 'theory',
     title: '¿Qué es una función?',
     formula: String.raw`f: A \to B, \qquad x \mapsto f(x)`,
-    text: 'Una función es una regla que asigna a <strong>cada</strong> entrada $x$ del conjunto $A$ <strong>exactamente una</strong> salida del conjunto $B$. Si una misma $x$ pudiera producir dos resultados distintos, no sería una función.',
-    why: 'Piensa en una máquina expendedora: eliges el código $4$ y siempre cae el mismo producto. Si a veces cayera uno y a veces otro, la máquina estaría rota. Con $y^{2}=x$ pasa eso: para $x=9$ hay dos salidas, $3$ y $-3$, así que no es función de $x$.',
-    note: '$f(x)$ se lee «f de $x$» y representa la <em>salida</em> cuando la entrada es $x$. No es una multiplicación.',
+    text: 'Una función es una <strong>máquina expendedora</strong>: pulsas el código $4$ y siempre cae el mismo producto. Cada entrada suelta <strong>una sola</strong> salida, siempre la misma. Si a veces cayera una golosina y a veces otra, dirías que la máquina está rota; con una función eso no pasa, porque cada entrada tiene su salida fija.',
+    formal: String.raw`Formalmente, $f$ asigna a <strong>cada</strong> entrada $x$ del conjunto $A$ <strong>exactamente una</strong> salida $f(x)$ del conjunto $B$. La clave es la unicidad: si una misma $x$ produce dos resultados, no hay función. Así, $y^{2}=x$ no es función de $x$, porque la entrada $x=9$ produce dos salidas, $3$ y $-3$.`,
+    note: '$f(x)$ se lee «f de $x$» y es la <em>salida</em> cuando entra $x$. No es una multiplicación.',
   },
   {
     id: 'la-maquina',
     kind: 'theory',
     title: 'La función como máquina',
     formula: String.raw`x \;\longrightarrow\; \boxed{\,f(x)=3x-5\,} \;\longrightarrow\; f(x)`,
-    text: String.raw`Toda función tiene tres piezas: la <strong>entrada</strong> $x$, la <strong>regla</strong> que transforma y la <strong>salida</strong> $f(x)$. Con $f(x)=3x-5$ y entrada $x=4$: multiplicamos $3\cdot 4 = 12$ y restamos $5$, así que $f(4)=7$.`,
-    why: String.raw`Evaluar siempre es sustituir y operar en el orden correcto. Si escribes $3\cdot 4-5$ y respetas la jerarquía (multiplicar antes de restar) llegas a $7$. Ese «sustituir» es la herramienta que usarás en todos los ejercicios.`,
+    text: String.raw`Una función también es una <strong>receta de cocina</strong>: entran los ingredientes ($x=4$), sigues los pasos <em>en orden</em> —multiplicar por $3$, restar $5$— y sale el plato ($7$). La receta nunca cambia: quien cocine y con los mismos ingredientes, obtiene el mismo resultado.`,
+    formal: String.raw`Evaluar es sustituir la entrada en la expresión y respetar la jerarquía de operaciones: $f(4)=3\cdot 4-5=12-5=7$. Ese «sustituir y operar en orden» es la herramienta que se usa en todos los ejercicios de este módulo.`,
     note: 'Pedir $f(0)$ es preguntar: «¿qué sale si entra un cero?».',
   },
   {
@@ -34,8 +35,8 @@ export const teoriaSheets = [
     kind: 'theory',
     title: 'Dominio: lo que puede entrar',
     formula: String.raw`\text{Dom}(f) = \{\, x \in \mathbb{R} \;\mid\; f(x) \text{ existe} \,\}`,
-    text: String.raw`El <strong>dominio</strong> es el conjunto de entradas permitidas: todas las $x$ para las que la cuenta se puede hacer. Calculamos $f(x) = \sqrt{x}$ y vemos que $x=-4$ no tiene resultado real, mientras que $x=9$ sí: $f(9)=3$. Por eso el dominio es $[0, \infty)$.`,
-    why: String.raw`En los números reales hay dos operaciones prohibidas: la raíz de índice par de un negativo y la división entre cero. Todo el resto de $x$ sí está permitido, y por eso el dominio casi siempre es «todo $\mathbb{R}$ menos unos pocos valores».`,
+    text: String.raw`El dominio son <strong>los botones que funcionan</strong> de la máquina. En $f(x)=\sqrt{x}$ puedes pulsar $9$ (sale $3$), pero si pulsas $-4$ la máquina se traba: no existe ningún número que multiplicado por sí mismo dé $-4$. Dominio: sólo los botones que no rompen la cuenta, aquí $[0,\infty)$.`,
+    formal: String.raw`$\text{Dom}(f)$ es el conjunto de las $x$ reales para las que la expresión tiene resultado real. En los reales sólo hay dos operaciones prohibidas: la raíz de índice par de un negativo y la división entre cero. Por eso el dominio casi siempre es «todo $\mathbb{R}$ menos unos pocos valores».`,
     note: 'Dominio = preguntarse «¿qué podría fallar aquí?».',
   },
   {
@@ -43,35 +44,35 @@ export const teoriaSheets = [
     kind: 'theory',
     title: 'Rango: lo que puede salir',
     formula: String.raw`\text{Rango}(f) = \{\, f(x) \;\mid\; x \in \text{Dom}(f) \,\}`,
-    text: String.raw`El <strong>rango</strong> (o imagen) es el conjunto de salidas que la función <em>realmente</em> produce. En $f(x)=x^{2}$ el dominio es todo $\mathbb{R}$, pero la salida nunca es negativa: el rango es $[0, \infty)$. La x puede valer cualquier cosa; el resultado no.`,
-    why: 'El rango no se copia del dominio: se deduce de la forma de la función. Una parábola que abre hacia arriba tiene un mínimo; un valor absoluto también. En cambio una recta no vertical recorre todos los reales.',
-    note: 'Truco: el rango es una propiedad de la <em>salida</em>, así que conviene pensarlo después de conocer el dominio.',
+    text: String.raw`El rango es la <strong>carta real del restaurante</strong>: puedes pedir lo que quieras, pero sólo te sirven lo que la cocina sabe hacer. En $f(x)=x^{2}$ entran números de todo tipo, pero la cocina de «elevar al cuadrado» nunca sirve un plato negativo. Rango: $[0,\infty)$.`,
+    formal: String.raw`El rango (o imagen) es el conjunto de salidas <em>alcanzables</em> al recorrer todo el dominio. No se copia del dominio: se deduce de la forma de la función. Una parábola que abre hacia arriba tiene un mínimo (su vértice) y nunca baja de ahí; el valor absoluto, igual; una recta no vertical recorre todos los reales.`,
+    note: 'El rango es una propiedad de la <em>salida</em>: piénsalo después de conocer el dominio.',
   },
   {
     id: 'intervalos',
     kind: 'theory',
     title: 'Saber leer intervalos',
     formula: String.raw`(a,b) \quad [a,b) \quad [a,\infty) \quad (-\infty,a)\cup(a,\infty)`,
-    text: String.raw`<strong>Corchete</strong> $[\,]$ significa que el extremo <em>sí</em> entra; <strong>paréntesis</strong> $(\;)$ significa que queda fuera. Los símbolos $-\infty$ y $\infty$ nunca llevan corchete, porque el infinito no es un número al que se pueda llegar.`,
-    why: String.raw`En $f(x)=\sqrt{x-2}$ el valor $x=2$ sí funciona (da $0$), así que se escribe corchete: $[2,\infty)$. En cambio en $g(x)=\dfrac{1}{x-2}$ el valor $x=2$ rompe la cuenta, por eso se escribe paréntesis: $(-\infty,2)\cup(2,\infty)$.`,
-    note: String.raw`La unión $\cup$ se usa cuando el dominio se parte en dos trozos separados.`,
+    text: String.raw`Un intervalo es una <strong>lista de invitados</strong>: el corchete $[\,]$ significa que el extremo <em>sí entra</em> a la fiesta; el paréntesis $(\;)$, que se queda en la puerta. Y el infinito nunca lleva corchete, porque es <em>un lugar al que nunca llegas</em>: no es un número, es una dirección.`,
+    formal: String.raw`En $f(x)=\sqrt{x-2}$ el valor $x=2$ sí funciona (produce $0$), así que entra: $[2,\infty)$. En $g(x)=\dfrac{1}{x-2}$ el valor $x=2$ rompe la cuenta y queda fuera: $(-\infty,2)\cup(2,\infty)$. La unión $\cup$ une los trozos separados que deja un valor prohibido.`,
+    note: 'Corchete = dentro; paréntesis = fuera; infinito = siempre paréntesis.',
   },
   {
     id: 'familias-i',
     kind: 'theory',
     title: 'Familias básicas: recta y parábola',
     formula: String.raw`f(x)=mx+b \qquad g(x)=ax^{2}+bx+c`,
-    text: String.raw`La <strong>lineal</strong> crece o decrece siempre igual: su gráfica es una recta y su rango es todo $\mathbb{R}$ (salvo la recta horizontal). La <strong>cuadrática</strong> dibuja una parábola con un vértice: si $a>0$ abre hacia arriba y tiene mínimo; si $a<0$, máximo.`,
-    why: 'Estas dos familias son el esqueleto de casi todo lo demás: los desplazamientos, las restricciones y el rango se ven mejor cuando reconoces la forma base antes de mirar los números.',
-    note: 'Reconocer la forma base es el atajo: primero el tipo, después los detalles.',
+    text: String.raw`Antes de mirar los números, <strong>reconoce la raza del perro</strong>. La lineal es una <strong>rampa</strong>: sube o baja siempre con la misma inclinación, sin sorpresas. La cuadrática es una <strong>pelota lanzada al aire</strong>: sube, alcanza su punto más alto (o más bajo, si abre hacia abajo) y regresa.`,
+    formal: String.raw`La lineal $f(x)=mx+b$ tiene pendiente constante y rango todo $\mathbb{R}$ (salvo la horizontal, con $m=0$). La cuadrática tiene un vértice: si $a>0$ abre hacia arriba y su rango parte del mínimo; si $a<0$, del máximo. Reconocer la forma base resuelve dominio y rango antes que los números.`,
+    note: 'Primero el tipo de función, después los detalles.',
   },
   {
     id: 'familias-ii',
     kind: 'theory',
     title: 'Familias básicas: raíz, fracción y absoluto',
     formula: String.raw`\sqrt{x} \qquad \frac{1}{x} \qquad |x|`,
-    text: String.raw`La <strong>radical</strong> $\sqrt{x}$ empieza en su punto inicial y avanza en una sola dirección. La <strong>racional</strong> $\dfrac{1}{x}$ se parte en dos ramas con una asíntota donde el denominador se anula. El <strong>valor absoluto</strong> $|x|$ tiene forma de $V$ y nunca da resultados negativos.`,
-    why: String.raw`Cada familia trae su propia restricción de dominio y su propia forma de rango: el radical exige radicando $\ge 0$, la racional exige denominador $\neq 0$, y el valor absoluto garantiza rango $\ge 0$. Son las tres pistas que resuelven casi todos los ejercicios.`,
-    note: 'Con esto ya tienes el mapa completo: en el submódulo «Regla de Oro» convertimos estas pistas en un procedimiento.',
+    text: String.raw`Tres personajes con <strong>reglas de casa</strong>: la raíz es una <em>puerta que sólo abre para números no negativos</em>; la fracción $\dfrac{1}{x}$ es un <em>camino partido en dos por un río</em> que nadie cruza (en $x=0$ el denominador se anula); y el valor absoluto $|x|$ es una <em>hoja doblada en V</em>: mide la distancia y nunca sale negativa.`,
+    formal: String.raw`Cada familia trae su restricción de dominio y su forma de rango: el radical exige radicando $\ge 0$ (dominio y rango $[0,\infty)$); la racional exige denominador $\neq 0$ (dominio y rango $\mathbb{R}-\{0\}$); el valor absoluto, definido en todo $\mathbb{R}$, garantiza rango $\ge 0$.`,
+    note: 'Con este mapa, en «Regla de Oro» convertimos las pistas de cada familia en un procedimiento.',
   },
 ];
